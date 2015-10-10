@@ -8,7 +8,7 @@
 2. Avoidance, the boids try not to collide with objects and other birds
 3. Alignment, the boids try to align their direction of movement
 
-##3# Implementation
+##### Implementation
 
 * Implemented using vectors, thanks to [victor.js](http://victorjs.org)
 * Fast retrieval of neighboring boids by using an R-Tree, thanks to [RBush](https://github.com/mourner/rbush)
