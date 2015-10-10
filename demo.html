@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html style="width:100%; height:100%;">
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="frameworks/jquery.mobile-1.4.3.css" type="text/css" title="Prototype" charset="utf-8">
+        <style type="text/css" media="screen">
+            *:not(input) {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+        </style>
+        
+        <script type="text/javascript" src="common/utils.js"></script>
+        <script type="text/javascript" src="common/rbush.js"></script>
+        <script type="text/javascript" src="common/Vector.js"></script>
+        <script type="text/javascript" src="common/VisualizationEngine.js"></script>
+        <script type="text/javascript" src="frameworks/jquery-2.1.1.js"></script>
+        <script src="frameworks/jquery.mobile-1.4.3.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="frameworks/knockout-3.2.0.js"></script>
+
+        <script type="text/javascript" src="models/Bird.js"></script>
+        <script type="text/javascript" src="models/Predator.js"></script>
+        <script type="text/javascript" src="models/Obstacle.js"></script>
+        
+        <script type="text/javascript" src="rules.js"></script>
+        <script type="text/javascript" src="events.js"></script>
+        <script type="text/javascript" src="animation.js"></script>
+    </head>
+    <body style="width:100%; height:100%; margin:0px">
+        <div data-role="page" id="main-page">
+
+            <div data-role="content" style="padding:0px;">
+                
+                <div class="ui-grid-a" style="height:100%">
+                    <div class="ui-block-a" style="height:100%; width:70%; background-color:#d0dee8">
+                        <canvas id="canvas" width="100%" height="100%" style="position:absolute; left:0px; top:0px;"></canvas>
+                    </div>
+                    <div class="ui-block-b" style="height:100%; width:30%; overflow: scroll;">
+                        <ul data-role="listview" style="margin:0em;">
+                            <li data-role="list-divider">Actions</li>
+                            <li>
+                                <a class="ui-btn ui-icon-camera ui-btn-icon-left" data-bind="click: viewModel.toggleAnimation">Toggle animation
+                                </a>
+                            </li>
+                            <li>
+                                <a class="ui-btn ui-icon-cloud ui-btn-icon-left" data-bind="click: viewModel.addObstacle">Add obstacle</a>
+                            </li>
+                            <li>
+                                <a class="ui-btn ui-icon-alert ui-btn-icon-left" data-bind="click: viewModel.addPredator">Add predator</a>
+                            </li>
+                            <li>
+                                <a class="ui-btn ui-icon-gear ui-btn-icon-left" data-bind="click: function(){viewModel.flocking( !viewModel.flocking() )}">Toggle flocking</a>
+                            </li>
+                            <li class="">
+                                <a class="ui-btn ui-icon-delete ui-btn-icon-left" data-bind="click: viewModel.clearObstaclesAndPredators">
+                                    Clear
+                                </a>
+                            </li>
+                            <li data-role="list-divider">Weights %</li>
+                            <li class="">
+                            	<div>
+    							    <label for="input-slider-inside" class="">Personal space:</label>
+    							    <input type="range" name="input-slider-inside" id="input-slider-inside" data-highlight="true" min="0" max="100" step="1" data-bind="slider: viewModel.personalSpace">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-limit" class="">Neighbor radius:</label>
+    							    <input type="range" name="input-slider-limit" id="input-slider-limit" data-highlight="true" min="1" max="800" step="1" data-bind="slider: viewModel.neighborRadius">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-size" class="">Cohesion Weight:</label>
+    							    <input type="range" name="input-slider-size" id="input-slider-size" data-highlight="true" min="0" max="1000" step="1" data-bind="slider: viewModel.cohesionWeight">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-distance" class="">Separation Weight:</label>
+    							    <input type="range" name="input-slider-distance" id="input-slider-distance" data-highlight="true" min="0" max="100000" step="1" data-bind="slider: viewModel.separationWeight">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-distance" class="">Alignment Weight:</label>
+    							    <input type="range" name="input-slider-distance" id="input-slider-distance" data-highlight="true" min="0" max="1000" step="1" data-bind="slider: viewModel.alignmentWeight">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-distance" class="">Predators Weight:</label>
+    							    <input type="range" name="input-slider-distance" id="input-slider-distance" data-highlight="true" min="0" max="20000" step="1" data-bind="slider: viewModel.avoidPredatorsWeight">
+    							</div>
+                            </li>
+                            <li>
+                            	<div>
+    							    <label for="input-slider-distance" class="">Objects Weight:</label>
+    							    <input type="range" name="input-slider-distance" id="input-slider-distance" data-highlight="true" min="0" max="200000" step="1" data-bind="slider: viewModel.avoidObjectsWeight">
+    							</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div><!-- /content -->
+
+        </div><!-- /page -->
+    </body>
+</html>
